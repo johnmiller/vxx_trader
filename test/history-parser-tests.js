@@ -37,7 +37,7 @@ describe("history-parser", function(){
 	});	
 
 	function read(callback, done){
-		parser.read(__dirname+'/test.csv')
+		parser.read(__dirname+'/history-parser-test.csv')
 			.done(function(rows){
 				callback(rows);
 				done();
