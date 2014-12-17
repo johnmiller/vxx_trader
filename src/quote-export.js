@@ -1,11 +1,15 @@
-var fs = require('fs');
-var csv = require('csv');
+var csv = require('fast-csv');
+var q = require('q');
 
 function writeFile(data, path){
-	csv.stringify(data.reverse(), {header: true}, function(err,  output){
-		fs.writeFileSync(path, output, 'UTF-8');
-	});
-}
+	var deferred = q.defer();
 
+	csv.writeToPath(path, data.reverse(), {headers: true})
+		.on('finish', function(){
+			deferred.resolve();
+		});
+
+	return deferred.promise;
+}
 
 exports.writeFile = writeFile;

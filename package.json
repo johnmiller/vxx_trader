@@ -4,7 +4,7 @@
   "description": "Trading strategy builder for vxx options",
   "main": "trader.js",
   "dependencies": {
-    "csv": "^0.4.1",
+    "fast-csv": "^0.5.4",
     "q": "^1.1.2",
     "request": "^2.51.0",
     "underscore": "^1.7.0"
