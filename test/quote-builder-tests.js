@@ -5,12 +5,7 @@ var _ = require('underscore');
 var q = require('q');
 
 describe('quote-builder', function(){
-	
-	beforeEach(function(){
-		var deferred = q.defer();
-		var mockParser = {
-			read: function(path){
-				return q.when([{
+	var rows = [{
 					'Date': '2014-11-30',
 					'Open': '11.45',
 					'High': '11.85',
@@ -18,7 +13,31 @@ describe('quote-builder', function(){
 					'Close': '11.63',
 					'Volume': '213455234',
 					'Adj Close': '23.26',
-				}]);
+				},
+				{
+					'Date': '2014-11-30',
+					'Open': '11.45',
+					'High': '11.85',
+					'Low': '11.23',
+					'Close': '11.63',
+					'Volume': '213455234',
+					'Adj Close': '23.26',
+				},
+				{
+					'Date': '2014-11-30',
+					'Open': '11.45',
+					'High': '11.85',
+					'Low': '11.23',
+					'Close': '11.63',
+					'Volume': '213455234',
+					'Adj Close': '23.26',
+				}];
+
+	beforeEach(function(){
+		var deferred = q.defer();
+		var mockParser = {
+			read: function(path){
+				return q.when(rows);
 			}
 		};
 
@@ -30,39 +49,43 @@ describe('quote-builder', function(){
 	});
 
 	quoteShould('assign open', function(quote){ 
-		quote.open.should.eql('11.45');
+		quote.open.should.eql(11.45);
 	});
 
 	quoteShould('assign high', function(quote){ 
-		quote.high.should.eql('11.85');
+		quote.high.should.eql(11.85);
 	});
 
 	quoteShould('assign low', function(quote){ 
-		quote.low.should.eql('11.23');
+		quote.low.should.eql(11.23);
 	});
 
 	quoteShould('assign close', function(quote){ 
-		quote.close.should.eql('11.63');
+		quote.close.should.eql(11.63);
 	});
 
 	quoteShould('assign volume', function(quote){ 
-		quote.volume.should.eql('213455234');
+		quote.volume.should.eql(213455234);
 	});
 
 	quoteShould('assign adj close', function(quote){ 
-		quote.adj_close.should.eql('23.26');
+		quote.adj_close.should.eql(23.26);
 	});
 
 	quoteShould('assign adj high', function(quote){ 
-		quote.adj_high.should.eql('23.70');
+		quote.adj_high.should.eql(23.70);
 	});
 
 	quoteShould('assign adj low', function(quote){ 
-		quote.adj_low.should.eql('22.46');
+		quote.adj_low.should.eql(22.46);
 	});
 
 	quoteShould('assign adj open', function(quote){ 
-		quote.adj_open.should.eql('22.90');
+		quote.adj_open.should.eql(22.90);
+	});
+
+	it('assign ', function(){
+
 	});
 
 	function quoteShould(description, callback){
